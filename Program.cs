@@ -13,15 +13,17 @@ using MentalHealth.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.Listen(System.Net.IPAddress.Any, 5058);  // Or your desired port number
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "5058"; // Default to 5058 if no port is set
+    options.Listen(System.Net.IPAddress.Any, int.Parse(port));
 });
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
-        builder => builder.AllowAnyOrigin()
+        builder => builder.WithOrigins("https://bejewelled-twilight-d13f44.netlify.app/")  // Replace with your frontend domain
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });
+
 
 // Add services to the container.
 builder.Services.AddControllers()
@@ -40,10 +42,14 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+    ?? Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
+
+
 // Configure DbContext with PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(connectionString);
     
     // Add detailed logging in development
     if (builder.Environment.IsDevelopment())
