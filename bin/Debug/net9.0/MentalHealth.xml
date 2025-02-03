@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MentalHealth</name>
+    </assembly>
+    <members>
+        <member name="M:MentalHealth.Controllers.CategoryController.GetAllCategoriesWithPostCount">
+            <summary>
+            Gets all categories with optional related data
+            </summary>
+            <param name="pageNumber">Page number (default: 1)</param>
+            <param name="pageSize">Page size (default: 10, max: 50)</param>
+            <returns>Paged list of categories</returns>
+        </member>
+        <member name="M:MentalHealth.Controllers.CategoryController.GetById(System.Int32)">
+            <summary>
+            Gets a specific category by id with optional related data
+            </summary>
+            <param name="id">The category id</param>
+            <returns>The requested category</returns>
+        </member>
+        <member name="M:MentalHealth.Controllers.CommentController.GetAll(System.Nullable{System.Int32},System.Int32,System.Int32)">
+            <summary>
+            Gets all comments with optional post filtering and pagination
+            </summary>
+            <remarks>
+            Sample request:
+                GET /api/comments?postId=1&amp;pageNumber=1&amp;pageSize=10
+            </remarks>
+            <param name="postId">Optional post id to filter comments by</param>
+            <param name="pageNumber">Page number (default: 1)</param>
+            <param name="pageSize">Page size (default: 10, max: 50)</param>
+            <returns>Paged list of comments</returns>
+        </member>
+        <member name="M:MentalHealth.Controllers.CommentController.GetById(System.Int32)">
+            <summary>
+            Gets a specific comment by id
+            </summary>
+            <param name="id">The comment id</param>
+            <returns>The requested comment</returns>
+        </member>
+        <member name="T:MentalHealth.Controllers.PostController">
+            <summary>
+            Controller for managing blog posts
+            </summary>
+        </member>
+        <member name="M:MentalHealth.Controllers.PostController.GetAll(System.Nullable{System.Int32},System.String,System.Boolean,System.Boolean,System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets all posts with optional filtering, search, and related data
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /api/posts?searchTerm=health mental&amp;categoryId=1&amp;pageNumber=1&amp;pageSize=10
+            
+            Search supports multiple words and will match any post containing any of the search terms in either title or content.
+            </remarks>
+            <param name="categoryId">Optional category id to filter posts by</param>
+            <param name="searchTerm">Search terms to filter posts. Multiple words will be treated as separate search terms</param>
+            <param name="includeCategory">If true, includes the category data</param>
+            <param name="includeComments">If true, includes the comments</param>
+            <param name="pageNumber">Page number (default: 1)</param>
+            <param name="pageSize">Page size (default: 10, max: 50)</param>
+            <returns>Paged list of posts matching the search criteria</returns>
+            <response code="200">Returns the paged list of posts</response>
+            <response code="400">If the pagination parameters are invalid</response>
+        </member>
+        <member name="M:MentalHealth.Controllers.PostController.GetById(System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Gets a specific post by id with optional related data
+            </summary>
+            <param name="id">The post id</param>
+            <param name="includeCategory">If true, includes the category data</param>
+            <param name="includeComments">If true, includes the comments</param>
+            <returns>The requested post</returns>
+        </member>
+        <member name="T:MentalHealth.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MentalHealth.Migrations.AddCommentsAndLikes">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.AddCommentsAndLikes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.AddCommentsAndLikes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.AddCommentsAndLikes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MentalHealth.Migrations.CategoryNameUnique">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.CategoryNameUnique.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.CategoryNameUnique.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.CategoryNameUnique.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MentalHealth.Migrations.PendingChangesMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.PendingChangesMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.PendingChangesMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.PendingChangesMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MentalHealth.Migrations.AddDateToPost">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.AddDateToPost.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.AddDateToPost.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.AddDateToPost.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MentalHealth.Migrations.ChatGPT">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.ChatGPT.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.ChatGPT.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MentalHealth.Migrations.ChatGPT.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
